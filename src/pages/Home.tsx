@@ -5,6 +5,8 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import meowmartPreview from "@/assets/meowmart.png";
+import uiuxPreview from "@/assets/uiux-designs.png";
 
 const Home = () => {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
@@ -16,6 +18,7 @@ const Home = () => {
       description: "Explore my collection of web applications",
       link: "/projects",
       isInternal: true,
+      image: meowmartPreview,
     },
     {
       id: "uiux",
@@ -23,6 +26,7 @@ const Home = () => {
       description: "View my design portfolio on Behance",
       link: "https://behance.net/sirri",
       isInternal: false,
+      image: uiuxPreview,
     },
   ];
 
@@ -116,32 +120,50 @@ const Home = () => {
                   {project.isInternal ? (
                     <Link to={project.link}>
                       <Card
-                        className="w-[280px] h-[280px] glass-effect border-white/10 p-8 card-glow cursor-pointer"
+                        className="w-[280px] glass-effect border-white/10 overflow-hidden card-glow cursor-pointer"
                         onMouseEnter={() => setHoveredCard(project.id)}
                         onMouseLeave={() => setHoveredCard("section")}
                       >
-                        <div className="h-full flex flex-col justify-center items-center text-center">
-                          <h3 className="text-2xl font-bold mb-4 text-primary">
-                            {project.title}
-                          </h3>
-                          <p className="text-muted-foreground mb-6">{project.description}</p>
-                          <ArrowRight className="w-8 h-8 text-primary" />
+                        <div className="aspect-video w-full overflow-hidden">
+                          <img 
+                            src={project.image} 
+                            alt={project.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="p-6">
+                          <div className="flex items-start justify-between mb-3">
+                            <h3 className="text-xl font-bold text-primary">
+                              {project.title}
+                            </h3>
+                            <ArrowRight className="w-5 h-5 text-primary flex-shrink-0" />
+                          </div>
+                          <p className="text-muted-foreground text-sm">{project.description}</p>
                         </div>
                       </Card>
                     </Link>
                   ) : (
                     <a href={project.link} target="_blank" rel="noopener noreferrer">
                       <Card
-                        className="w-[280px] h-[280px] glass-effect border-white/10 p-8 card-glow cursor-pointer"
+                        className="w-[280px] glass-effect border-white/10 overflow-hidden card-glow cursor-pointer"
                         onMouseEnter={() => setHoveredCard(project.id)}
                         onMouseLeave={() => setHoveredCard("section")}
                       >
-                        <div className="h-full flex flex-col justify-center items-center text-center">
-                          <h3 className="text-2xl font-bold mb-4 text-primary">
-                            {project.title}
-                          </h3>
-                          <p className="text-muted-foreground mb-6">{project.description}</p>
-                          <ExternalLink className="w-8 h-8 text-primary" />
+                        <div className="aspect-video w-full overflow-hidden">
+                          <img 
+                            src={project.image} 
+                            alt={project.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="p-6">
+                          <div className="flex items-start justify-between mb-3">
+                            <h3 className="text-xl font-bold text-primary">
+                              {project.title}
+                            </h3>
+                            <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                          </div>
+                          <p className="text-muted-foreground text-sm">{project.description}</p>
                         </div>
                       </Card>
                     </a>
@@ -167,32 +189,50 @@ const Home = () => {
                   {project.isInternal ? (
                     <Link to={project.link}>
                       <Card
-                        className="w-[280px] sm:w-[350px] h-[280px] sm:h-[350px] glass-effect border-white/10 p-8 card-glow cursor-pointer"
+                        className="w-[280px] sm:w-[340px] glass-effect border-white/10 overflow-hidden card-glow cursor-pointer"
                         onMouseEnter={() => setHoveredCard(project.id)}
                         onMouseLeave={() => setHoveredCard(null)}
                       >
-                        <div className="h-full flex flex-col justify-center items-center text-center">
-                          <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">
-                            {project.title}
-                          </h3>
-                          <p className="text-muted-foreground mb-6">{project.description}</p>
-                          <ArrowRight className="w-8 h-8 text-primary" />
+                        <div className="aspect-video w-full overflow-hidden">
+                          <img 
+                            src={project.image} 
+                            alt={project.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="p-6 sm:p-8">
+                          <div className="flex items-start justify-between mb-4">
+                            <h3 className="text-xl sm:text-2xl font-bold text-primary">
+                              {project.title}
+                            </h3>
+                            <ArrowRight className="w-5 h-5 text-primary flex-shrink-0" />
+                          </div>
+                          <p className="text-muted-foreground text-sm sm:text-base">{project.description}</p>
                         </div>
                       </Card>
                     </Link>
                   ) : (
                     <a href={project.link} target="_blank" rel="noopener noreferrer">
                       <Card
-                        className="w-[280px] sm:w-[350px] h-[280px] sm:h-[350px] glass-effect border-white/10 p-8 card-glow cursor-pointer"
+                        className="w-[280px] sm:w-[340px] glass-effect border-white/10 overflow-hidden card-glow cursor-pointer"
                         onMouseEnter={() => setHoveredCard(project.id)}
                         onMouseLeave={() => setHoveredCard(null)}
                       >
-                        <div className="h-full flex flex-col justify-center items-center text-center">
-                          <h3 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">
-                            {project.title}
-                          </h3>
-                          <p className="text-muted-foreground mb-6">{project.description}</p>
-                          <ExternalLink className="w-8 h-8 text-primary" />
+                        <div className="aspect-video w-full overflow-hidden">
+                          <img 
+                            src={project.image} 
+                            alt={project.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="p-6 sm:p-8">
+                          <div className="flex items-start justify-between mb-4">
+                            <h3 className="text-xl sm:text-2xl font-bold text-primary">
+                              {project.title}
+                            </h3>
+                            <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                          </div>
+                          <p className="text-muted-foreground text-sm sm:text-base">{project.description}</p>
                         </div>
                       </Card>
                     </a>

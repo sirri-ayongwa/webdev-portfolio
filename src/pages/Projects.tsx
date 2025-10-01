@@ -4,6 +4,12 @@ import { ExternalLink } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { cn } from "@/lib/utils";
 import { SiHtml5, SiCss3, SiJavascript, SiReact, SiTypescript, SiTailwindcss } from "react-icons/si";
+import gatherlyPreview from "@/assets/gatherly.png";
+import meowmartPreview from "@/assets/meowmart.png";
+import tipCalcPreview from "@/assets/tip-calculator.png";
+import recipeFinderPreview from "@/assets/recipe-finder.png";
+import wdcPreview from "@/assets/world-disaster-center.png";
+import siciliamiaPreview from "@/assets/siciliamia.png";
 
 const Projects = () => {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
@@ -19,6 +25,7 @@ const Projects = () => {
         { icon: SiTailwindcss, name: "Tailwind CSS" },
       ],
       link: "https://gatherly-ashen.vercel.app/",
+      image: gatherlyPreview,
     },
     {
       title: "Meowmart",
@@ -29,6 +36,7 @@ const Projects = () => {
         { icon: SiTailwindcss, name: "Tailwind CSS" },
       ],
       link: "https://meowmart.vercel.app/",
+      image: meowmartPreview,
     },
     {
       title: "Tip Calculator",
@@ -40,6 +48,7 @@ const Projects = () => {
         { icon: SiJavascript, name: "JavaScript" },
       ],
       link: "https://tip-calculator-eight-livid.vercel.app/",
+      image: tipCalcPreview,
     },
     {
       title: "Recipe Finder",
@@ -50,6 +59,7 @@ const Projects = () => {
         { icon: SiCss3, name: "CSS3" },
       ],
       link: "https://react-recipe-finder-one.vercel.app/",
+      image: recipeFinderPreview,
     },
   ];
 
@@ -64,6 +74,7 @@ const Projects = () => {
         { icon: SiTailwindcss, name: "Tailwind CSS" },
       ],
       link: "https://www.worlddisastercenter.org/",
+      image: wdcPreview,
     },
     {
       title: "Siciliamia",
@@ -75,6 +86,7 @@ const Projects = () => {
         { icon: SiTailwindcss, name: "Tailwind CSS" },
       ],
       link: "https://bluehouse.is/",
+      image: siciliamiaPreview,
     },
   ];
 
@@ -108,24 +120,33 @@ const Projects = () => {
                 rel="noopener noreferrer"
                 className="block"
               >
-                <Card className="glass-effect border-white/10 p-6 card-glow transition-all duration-300 hover:scale-105">
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-xl font-bold text-primary">{project.title}</h3>
-                    <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                <Card className="glass-effect border-white/10 overflow-hidden card-glow transition-all duration-300 hover:scale-105">
+                  <div className="aspect-video w-full overflow-hidden">
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <p className="text-muted-foreground text-sm mb-6">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    {project.technologies.map((tech) => (
-                      <div
-                        key={tech.name}
-                        className="flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20"
-                      >
-                        <tech.icon className="w-4 h-4 text-primary" />
-                        <span className="text-xs text-muted-foreground">{tech.name}</span>
-                      </div>
-                    ))}
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="text-xl font-bold text-primary">{project.title}</h3>
+                      <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                    </div>
+                    <p className="text-muted-foreground text-sm mb-6">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-3">
+                      {project.technologies.map((tech) => (
+                        <div
+                          key={tech.name}
+                          className="flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20"
+                        >
+                          <tech.icon className="w-4 h-4 text-primary" />
+                          <span className="text-xs text-muted-foreground">{tech.name}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </Card>
               </a>
@@ -161,26 +182,35 @@ const Projects = () => {
                 onMouseLeave={() => setHoveredCard(null)}
               >
                 <Card className={cn(
-                  "w-[300px] sm:w-[380px] glass-effect border-white/10 p-6 sm:p-8 card-glow transition-all duration-300",
+                  "w-[300px] sm:w-[380px] glass-effect border-white/10 overflow-hidden card-glow transition-all duration-300",
                   hoveredCard === index && "scale-105"
                 )}>
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-xl sm:text-2xl font-bold text-primary">{project.title}</h3>
-                    <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                  <div className="aspect-video w-full overflow-hidden">
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <p className="text-muted-foreground text-sm sm:text-base mb-6 line-clamp-3">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    {project.technologies.map((tech) => (
-                      <div
-                        key={tech.name}
-                        className="flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20"
-                      >
-                        <tech.icon className="w-4 h-4 text-primary" />
-                        <span className="text-xs text-muted-foreground">{tech.name}</span>
-                      </div>
-                    ))}
+                  <div className="p-6 sm:p-8">
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="text-xl sm:text-2xl font-bold text-primary">{project.title}</h3>
+                      <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                    </div>
+                    <p className="text-muted-foreground text-sm sm:text-base mb-6 line-clamp-3">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-3">
+                      {project.technologies.map((tech) => (
+                        <div
+                          key={tech.name}
+                          className="flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20"
+                        >
+                          <tech.icon className="w-4 h-4 text-primary" />
+                          <span className="text-xs text-muted-foreground">{tech.name}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </Card>
               </a>
@@ -206,24 +236,33 @@ const Projects = () => {
                 rel="noopener noreferrer"
                 className="block"
               >
-                <Card className="glass-effect border-white/10 p-6 card-glow transition-all duration-300 hover:scale-105">
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-xl font-bold text-primary">{project.title}</h3>
-                    <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                <Card className="glass-effect border-white/10 overflow-hidden card-glow transition-all duration-300 hover:scale-105">
+                  <div className="aspect-video w-full overflow-hidden">
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <p className="text-muted-foreground text-sm mb-6">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    {project.technologies.map((tech) => (
-                      <div
-                        key={tech.name}
-                        className="flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20"
-                      >
-                        <tech.icon className="w-4 h-4 text-primary" />
-                        <span className="text-xs text-muted-foreground">{tech.name}</span>
-                      </div>
-                    ))}
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="text-xl font-bold text-primary">{project.title}</h3>
+                      <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                    </div>
+                    <p className="text-muted-foreground text-sm mb-6">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-3">
+                      {project.technologies.map((tech) => (
+                        <div
+                          key={tech.name}
+                          className="flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20"
+                        >
+                          <tech.icon className="w-4 h-4 text-primary" />
+                          <span className="text-xs text-muted-foreground">{tech.name}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </Card>
               </a>
@@ -259,26 +298,35 @@ const Projects = () => {
                 onMouseLeave={() => setHoveredCard(null)}
               >
                 <Card className={cn(
-                  "w-[300px] sm:w-[380px] glass-effect border-white/10 p-6 sm:p-8 card-glow transition-all duration-300",
+                  "w-[300px] sm:w-[380px] glass-effect border-white/10 overflow-hidden card-glow transition-all duration-300",
                   hoveredCard === index && "scale-105"
                 )}>
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-xl sm:text-2xl font-bold text-primary">{project.title}</h3>
-                    <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                  <div className="aspect-video w-full overflow-hidden">
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <p className="text-muted-foreground text-sm sm:text-base mb-6 line-clamp-3">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    {project.technologies.map((tech) => (
-                      <div
-                        key={tech.name}
-                        className="flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20"
-                      >
-                        <tech.icon className="w-4 h-4 text-primary" />
-                        <span className="text-xs text-muted-foreground">{tech.name}</span>
-                      </div>
-                    ))}
+                  <div className="p-6 sm:p-8">
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="text-xl sm:text-2xl font-bold text-primary">{project.title}</h3>
+                      <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                    </div>
+                    <p className="text-muted-foreground text-sm sm:text-base mb-6 line-clamp-3">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-3">
+                      {project.technologies.map((tech) => (
+                        <div
+                          key={tech.name}
+                          className="flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20"
+                        >
+                          <tech.icon className="w-4 h-4 text-primary" />
+                          <span className="text-xs text-muted-foreground">{tech.name}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </Card>
               </a>

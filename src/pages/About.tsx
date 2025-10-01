@@ -2,6 +2,8 @@ import { Card } from "@/components/ui/card";
 import ScrollReveal from "@/components/ScrollReveal";
 import sirriImage from "@/assets/sirri-formal.png";
 import catImage from "@/assets/sirri-cat.png";
+import cmFlag from "@/assets/cm.png";
+import bdFlag from "@/assets/bd.png";
 import {
   SiHtml5,
   SiCss3,
@@ -51,35 +53,28 @@ const About = () => {
                   about all things tech, design, and creativity.
                 </p>
               </div>
-              <div className="flex justify-center">
+              <div className="flex flex-col items-center gap-6">
                 <img
                   src={sirriImage}
                   alt="Sirri Ayongwa"
                   className="rounded-2xl shadow-2xl max-w-sm w-full card-glow"
                 />
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-2">
+                    <img src={cmFlag} alt="Cameroon" className="h-5 w-auto" />
+                    <p className="text-muted-foreground text-sm">Cameroon</p>
+                  </div>
+                  <div className="text-2xl text-muted-foreground">•</div>
+                  <div className="flex items-center gap-2">
+                    <img src={bdFlag} alt="Bangladesh" className="h-5 w-auto" />
+                    <p className="text-muted-foreground text-sm">Bangladesh</p>
+                  </div>
+                </div>
               </div>
             </div>
           </ScrollReveal>
         </section>
 
-        {/* Location Section */}
-        <section className="mb-20">
-          <ScrollReveal>
-            <Card className="glass-effect border-white/10 p-8 sm:p-12">
-              <div className="flex flex-wrap items-center justify-center gap-8 text-center">
-                <div className="flex flex-col items-center">
-                  <div className="text-5xl mb-3">🇨🇲</div>
-                  <p className="text-muted-foreground">Cameroon</p>
-                </div>
-                <div className="text-3xl text-muted-foreground">•</div>
-                <div className="flex flex-col items-center">
-                  <div className="text-5xl mb-3">🇧🇩</div>
-                  <p className="text-muted-foreground">Bangladesh</p>
-                </div>
-              </div>
-            </Card>
-          </ScrollReveal>
-        </section>
 
         {/* Tech Stack Section */}
         <section className="mb-20">
