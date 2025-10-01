@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { inject } from '@vercel/speed-insights';
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
@@ -38,5 +39,8 @@ const App = () => (
     </TooltipProvider>
   </QueryClientProvider>
 );
+
+// Inject Vercel Speed Insights
+inject();
 
 export default App;
