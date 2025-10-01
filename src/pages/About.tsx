@@ -42,11 +42,11 @@ const About = () => {
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-primary">
                   About Me
                 </h1>
-                <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
-                  I'm a hardworking and diligent Front-end Web Developer with over 3 years of
+               <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
+                  Front-end Web Developer with over 3 years of
                   experience building responsive and user-focused websites. I've worked remotely with
                   international teams, built personal projects to grow my skills, and consistently aim
-                  to deliver clean, functional designs that enhance user experience.
+                  to improve my skills and deliver clean, functional designs that enhance user experience.
                 </p>
                 <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
                   I love connecting with new people, collaborating on exciting ideas, and talking
