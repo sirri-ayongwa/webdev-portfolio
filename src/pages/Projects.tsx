@@ -155,7 +155,7 @@ const Projects = () => {
 
           {/* Desktop View - Stacked/Spread Layout */}
           <div
-            className="hidden sm:block relative h-[500px] md:h-[600px]"
+            className="hidden sm:block relative h-[500px] md:h-[600px] pt-48"
             onMouseEnter={() => setHoveredSection("personal")}
             onMouseLeave={() => setHoveredSection(null)}
           >
@@ -271,7 +271,7 @@ const Projects = () => {
 
           {/* Desktop View - Stacked/Spread Layout */}
           <div
-            className="hidden sm:block relative h-[500px] md:h-[600px]"
+            className="hidden sm:block relative h-[500px] md:h-[600px] pt-48"
             onMouseEnter={() => setHoveredSection("company")}
             onMouseLeave={() => setHoveredSection(null)}
           >
