@@ -98,7 +98,7 @@ const Projects = () => {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-6 text-primary">
             My Projects
           </h1>
-          <p className="text-center text-muted-foreground text-lg mb-20 max-w-2xl mx-auto">
+          <p className="text-center text-muted-foreground text-lg mb-50 max-w-2xl mx-auto">
             A showcase of my work, from personal experiments to professional collaborations
           </p>
         </ScrollReveal>
@@ -221,7 +221,7 @@ const Projects = () => {
         {/* Company Projects */}
         <section className="mb-20">
           <ScrollReveal>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center text-primary">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-50 text-center text-primary">
               Company Projects
             </h2>
           </ScrollReveal>
