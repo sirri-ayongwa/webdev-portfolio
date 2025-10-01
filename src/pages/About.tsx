@@ -41,7 +41,7 @@ const About = () => {
                   About Me
                 </h1>
                 <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
-                  I'm a hardworking and diligent Front-end Web Developer with over 4 years of
+                  I'm a hardworking and diligent Front-end Web Developer with over 3 years of
                   experience building responsive and user-focused websites. I've worked remotely with
                   international teams, built personal projects to grow my skills, and consistently aim
                   to deliver clean, functional designs that enhance user experience.
@@ -69,12 +69,12 @@ const About = () => {
               <div className="flex flex-wrap items-center justify-center gap-8 text-center">
                 <div className="flex flex-col items-center">
                   <div className="text-5xl mb-3">🇨🇲</div>
-                  <p className="text-muted-foreground">Cameroonian</p>
+                  <p className="text-muted-foreground">Cameroon</p>
                 </div>
                 <div className="text-3xl text-muted-foreground">•</div>
                 <div className="flex flex-col items-center">
                   <div className="text-5xl mb-3">🇧🇩</div>
-                  <p className="text-muted-foreground">Based in Bangladesh</p>
+                  <p className="text-muted-foreground">Bangladesh</p>
                 </div>
               </div>
             </Card>
@@ -114,30 +114,28 @@ const About = () => {
         {/* Cat Lover Section */}
         <section className="mb-20">
           <ScrollReveal>
-            <Card className="glass-effect border-white/10 p-8 sm:p-12 card-glow">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                  <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-primary">
-                    Beyond the Code
-                  </h2>
-                  <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-4">
-                    When I'm not coding, you'll find me spending time with my feline friends. I'm a
-                    proud cat lover and they're my favorite debugging partners!
-                  </p>
-                  <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
-                    There's something about their calm presence that helps me think through complex
-                    problems. Plus, they're excellent at reminding me to take breaks! 🐱
-                  </p>
-                </div>
-                <div className="flex justify-center">
-                  <img
-                    src={catImage}
-                    alt="Sirri with cat"
-                    className="rounded-2xl shadow-2xl max-w-md w-full card-glow"
-                  />
-                </div>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-primary">
+                  Beyond the Code
+                </h2>
+                <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-4">
+                  When I'm not coding, you'll find me spending time with my feline friends. I'm a
+                  proud cat lover and they're my favorite debugging partners!
+                </p>
+                <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+                  There's something about their calm presence that helps me think through complex
+                  problems. Plus, they're excellent at reminding me to take breaks! 🐱
+                </p>
               </div>
-            </Card>
+              <div className="flex justify-center">
+                <img
+                  src={catImage}
+                  alt="Sirri with cat"
+                  className="rounded-2xl shadow-2xl max-w-md w-full card-glow"
+                />
+              </div>
+            </div>
           </ScrollReveal>
         </section>
 

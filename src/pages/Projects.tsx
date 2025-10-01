@@ -78,61 +78,6 @@ const Projects = () => {
     },
   ];
 
-  const ProjectCard = ({
-    project,
-    index,
-    total,
-  }: {
-    project: typeof personalProjects[0];
-    index: number;
-    total: number;
-  }) => {
-    const isHovered = hoveredCard === index;
-    const baseOffset = index * 20;
-
-    return (
-      <a
-        href={project.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={cn(
-          "absolute transition-all duration-500 ease-out cursor-pointer",
-          !isHovered && hoveredCard !== null && "opacity-50 scale-95"
-        )}
-        style={{
-          left: isHovered ? "50%" : `${baseOffset}px`,
-          top: isHovered ? "50%" : `${baseOffset}px`,
-          transform: isHovered
-            ? "translate(-50%, -50%)"
-            : `rotate(${index * 2}deg)`,
-          zIndex: isHovered ? 50 : total - index,
-        }}
-        onMouseEnter={() => setHoveredCard(index)}
-        onMouseLeave={() => setHoveredCard(null)}
-      >
-        <Card className="w-[300px] sm:w-[380px] glass-effect border-white/10 p-6 sm:p-8 card-glow">
-          <div className="flex items-start justify-between mb-4">
-            <h3 className="text-xl sm:text-2xl font-bold text-primary">{project.title}</h3>
-            <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
-          </div>
-          <p className="text-muted-foreground text-sm sm:text-base mb-6 line-clamp-3">
-            {project.description}
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {project.technologies.map((tech) => (
-              <div
-                key={tech.name}
-                className="flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20"
-              >
-                <tech.icon className="w-4 h-4 text-primary" />
-                <span className="text-xs text-muted-foreground">{tech.name}</span>
-              </div>
-            ))}
-          </div>
-        </Card>
-      </a>
-    );
-  };
 
   return (
     <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
@@ -154,16 +99,56 @@ const Projects = () => {
             </h2>
           </ScrollReveal>
           <div
-            className="relative h-[500px] sm:h-[600px]"
-            onMouseLeave={() => setHoveredCard(null)}
+            className="relative h-[500px] sm:h-[600px] flex items-center justify-center"
+            onMouseEnter={() => setHoveredSection("personal")}
+            onMouseLeave={() => setHoveredSection(null)}
           >
             {personalProjects.map((project, index) => (
-              <ProjectCard
+              <a
                 key={project.title}
-                project={project}
-                index={index}
-                total={personalProjects.length}
-              />
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute transition-all duration-700 ease-out cursor-pointer"
+                style={{
+                  left: hoveredSection === "personal"
+                    ? `${20 + index * 25}%`
+                    : `50%`,
+                  top: hoveredSection === "personal"
+                    ? "50%"
+                    : `${40 + index * 20}px`,
+                  transform: hoveredSection === "personal"
+                    ? "translate(-50%, -50%)"
+                    : `translate(-50%, -50%) rotate(${index * 2}deg)`,
+                  zIndex: hoveredCard === index ? 50 : personalProjects.length - index,
+                }}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                <Card className={cn(
+                  "w-[300px] sm:w-[380px] glass-effect border-white/10 p-6 sm:p-8 card-glow transition-all duration-300",
+                  hoveredCard === index && "scale-105"
+                )}>
+                  <div className="flex items-start justify-between mb-4">
+                    <h3 className="text-xl sm:text-2xl font-bold text-primary">{project.title}</h3>
+                    <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                  </div>
+                  <p className="text-muted-foreground text-sm sm:text-base mb-6 line-clamp-3">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {project.technologies.map((tech) => (
+                      <div
+                        key={tech.name}
+                        className="flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20"
+                      >
+                        <tech.icon className="w-4 h-4 text-primary" />
+                        <span className="text-xs text-muted-foreground">{tech.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </a>
             ))}
           </div>
         </section>
@@ -176,16 +161,56 @@ const Projects = () => {
             </h2>
           </ScrollReveal>
           <div
-            className="relative h-[500px] sm:h-[600px]"
-            onMouseLeave={() => setHoveredCard(null)}
+            className="relative h-[500px] sm:h-[600px] flex items-center justify-center"
+            onMouseEnter={() => setHoveredSection("company")}
+            onMouseLeave={() => setHoveredSection(null)}
           >
             {companyProjects.map((project, index) => (
-              <ProjectCard
+              <a
                 key={project.title}
-                project={project}
-                index={index}
-                total={companyProjects.length}
-              />
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute transition-all duration-700 ease-out cursor-pointer"
+                style={{
+                  left: hoveredSection === "company"
+                    ? `${30 + index * 35}%`
+                    : `50%`,
+                  top: hoveredSection === "company"
+                    ? "50%"
+                    : `${40 + index * 20}px`,
+                  transform: hoveredSection === "company"
+                    ? "translate(-50%, -50%)"
+                    : `translate(-50%, -50%) rotate(${index * 2}deg)`,
+                  zIndex: hoveredCard === index ? 50 : companyProjects.length - index,
+                }}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                <Card className={cn(
+                  "w-[300px] sm:w-[380px] glass-effect border-white/10 p-6 sm:p-8 card-glow transition-all duration-300",
+                  hoveredCard === index && "scale-105"
+                )}>
+                  <div className="flex items-start justify-between mb-4">
+                    <h3 className="text-xl sm:text-2xl font-bold text-primary">{project.title}</h3>
+                    <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                  </div>
+                  <p className="text-muted-foreground text-sm sm:text-base mb-6 line-clamp-3">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {project.technologies.map((tech) => (
+                      <div
+                        key={tech.name}
+                        className="flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20"
+                      >
+                        <tech.icon className="w-4 h-4 text-primary" />
+                        <span className="text-xs text-muted-foreground">{tech.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </a>
             ))}
           </div>
         </section>

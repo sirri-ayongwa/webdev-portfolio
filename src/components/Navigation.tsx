@@ -22,11 +22,16 @@ const Navigation = () => {
   ];
 
   const scrollToContact = () => {
-    const contact = document.getElementById("contact");
-    if (contact) {
-      contact.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
+    // Navigate to home page first, then scroll to contact
+    if (window.location.pathname !== "/") {
+      window.location.href = "/#contact";
+    } else {
+      const contact = document.getElementById("contact");
+      if (contact) {
+        contact.scrollIntoView({ behavior: "smooth" });
+      }
     }
+    setIsOpen(false);
   };
 
   return (
@@ -44,7 +49,6 @@ const Navigation = () => {
             className="flex items-center space-x-2 text-xl sm:text-2xl font-bold hover:text-primary transition-colors"
           >
             <Code2 className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
-            <span className="hidden sm:inline">&lt;/&gt;</span>
           </NavLink>
 
           {/* Desktop Navigation */}
@@ -85,34 +89,51 @@ const Navigation = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="md:hidden glass-effect border-t border-white/10">
-          <div className="grid grid-cols-2 gap-4 p-6">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                end
-                onClick={() => setIsOpen(false)}
-                className={({ isActive }) =>
-                  cn(
-                    "p-4 text-center rounded-lg border border-white/10 hover:border-primary hover:bg-primary/10 transition-all",
-                    isActive && "border-primary bg-primary/10 text-primary"
-                  )
-                }
-              >
-                {link.label}
-              </NavLink>
-            ))}
-            <button
-              onClick={scrollToContact}
-              className="p-4 text-center rounded-lg border border-white/10 hover:border-primary hover:bg-primary/10 transition-all col-span-2"
-            >
-              Contact
-            </button>
+        <>
+          <div 
+            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            onClick={() => setIsOpen(false)}
+          />
+          <div className="fixed top-0 left-0 h-full w-64 bg-background/95 backdrop-blur-md border-r border-white/10 z-50 md:hidden animate-slide-in-left">
+            <div className="flex flex-col h-full">
+              <div className="flex justify-end p-4">
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 text-foreground hover:text-primary transition-colors"
+                  aria-label="Close menu"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              <nav className="flex flex-col space-y-6 px-8 py-4">
+                {navLinks.map((link) => (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    end
+                    onClick={() => setIsOpen(false)}
+                    className={({ isActive }) =>
+                      cn(
+                        "text-lg transition-colors hover:text-primary",
+                        isActive && "text-primary font-semibold"
+                      )
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                ))}
+                <button
+                  onClick={scrollToContact}
+                  className="text-lg text-left transition-colors hover:text-primary"
+                >
+                  Contact
+                </button>
+              </nav>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </nav>
   );
