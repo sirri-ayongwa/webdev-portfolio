@@ -19,6 +19,7 @@ const Navigation = () => {
     { to: "/", label: "Home" },
     { to: "/about", label: "About" },
     { to: "/projects", label: "Projects" },
+    { to: "/#contact", label: "Contact" },
   ];
 
   const scrollToContact = () => {
@@ -69,13 +70,6 @@ const Navigation = () => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </NavLink>
             ))}
-            <button
-              onClick={scrollToContact}
-              className="relative py-2 text-foreground hover:text-primary transition-colors group"
-            >
-              Contact
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-            </button>
           </div>
 
           {/* Mobile Menu Button */}
