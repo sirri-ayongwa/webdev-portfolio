@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 224 76% 33%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    /* Portfolio specific colors */
+    --soft-blue: 217 91% 70%;
+    --deep-blue: 224 76% 33%;
+    --tech-blue: 217 91% 60%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(90deg, hsl(0, 0%, 0%) 0%, hsl(224, 76%, 15%) 50%, hsl(224, 76%, 33%) 100%);
+    --gradient-overlay: linear-gradient(135deg, hsla(217, 91%, 60%, 0.1) 0%, hsla(224, 76%, 33%, 0.1) 100%);
+    
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsla(217, 91%, 60%, 0.3);
+    --shadow-card: 0 10px 40px hsla(0, 0%, 0%, 0.5);
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: linear-gradient(90deg, hsl(0, 0%, 0%) 0%, hsl(224, 76%, 15%) 50%, hsl(224, 76%, 33%) 100%);
+    background-attachment: fixed;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.8s ease-out forwards;
+  }
+
+  .glass-effect {
+    @apply bg-black/30 backdrop-blur-md border border-white/10;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(90deg, hsl(var(--foreground)) 0%, hsl(var(--primary)) 100%);
+  }
+
+  .card-glow {
+    box-shadow: 0 0 20px hsla(217, 91%, 60%, 0.2);
+    transition: var(--transition-smooth);
+  }
+
+  .card-glow:hover {
+    box-shadow: 0 0 40px hsla(217, 91%, 60%, 0.4);
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
