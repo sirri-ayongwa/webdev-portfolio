@@ -98,8 +98,43 @@ const Projects = () => {
               Personal Projects
             </h2>
           </ScrollReveal>
+          {/* Mobile View - Vertical Layout */}
+          <div className="sm:hidden space-y-6">
+            {personalProjects.map((project) => (
+              <a
+                key={project.title}
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <Card className="glass-effect border-white/10 p-6 card-glow transition-all duration-300 hover:scale-105">
+                  <div className="flex items-start justify-between mb-4">
+                    <h3 className="text-xl font-bold text-primary">{project.title}</h3>
+                    <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                  </div>
+                  <p className="text-muted-foreground text-sm mb-6">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {project.technologies.map((tech) => (
+                      <div
+                        key={tech.name}
+                        className="flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20"
+                      >
+                        <tech.icon className="w-4 h-4 text-primary" />
+                        <span className="text-xs text-muted-foreground">{tech.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </a>
+            ))}
+          </div>
+
+          {/* Desktop View - Stacked/Spread Layout */}
           <div
-            className="relative h-[500px] sm:h-[600px] flex items-center justify-center"
+            className="hidden sm:block relative h-[500px] md:h-[600px]"
             onMouseEnter={() => setHoveredSection("personal")}
             onMouseLeave={() => setHoveredSection(null)}
           >
@@ -112,13 +147,13 @@ const Projects = () => {
                 className="absolute transition-all duration-700 ease-out cursor-pointer"
                 style={{
                   left: hoveredSection === "personal"
-                    ? `${20 + index * 25}%`
+                    ? `${15 + index * 22}%`
                     : `50%`,
                   top: hoveredSection === "personal"
                     ? "50%"
                     : `${40 + index * 20}px`,
                   transform: hoveredSection === "personal"
-                    ? "translate(-50%, -50%)"
+                    ? "translate(-50%, -50%) scale(0.9)"
                     : `translate(-50%, -50%) rotate(${index * 2}deg)`,
                   zIndex: hoveredCard === index ? 50 : personalProjects.length - index,
                 }}
@@ -160,8 +195,44 @@ const Projects = () => {
               Company Projects
             </h2>
           </ScrollReveal>
+          
+          {/* Mobile View - Vertical Layout */}
+          <div className="sm:hidden space-y-6">
+            {companyProjects.map((project) => (
+              <a
+                key={project.title}
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <Card className="glass-effect border-white/10 p-6 card-glow transition-all duration-300 hover:scale-105">
+                  <div className="flex items-start justify-between mb-4">
+                    <h3 className="text-xl font-bold text-primary">{project.title}</h3>
+                    <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                  </div>
+                  <p className="text-muted-foreground text-sm mb-6">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {project.technologies.map((tech) => (
+                      <div
+                        key={tech.name}
+                        className="flex items-center gap-2 px-3 py-1 rounded-lg bg-primary/10 border border-primary/20"
+                      >
+                        <tech.icon className="w-4 h-4 text-primary" />
+                        <span className="text-xs text-muted-foreground">{tech.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </a>
+            ))}
+          </div>
+
+          {/* Desktop View - Stacked/Spread Layout */}
           <div
-            className="relative h-[500px] sm:h-[600px] flex items-center justify-center"
+            className="hidden sm:block relative h-[500px] md:h-[600px]"
             onMouseEnter={() => setHoveredSection("company")}
             onMouseLeave={() => setHoveredSection(null)}
           >
@@ -180,7 +251,7 @@ const Projects = () => {
                     ? "50%"
                     : `${40 + index * 20}px`,
                   transform: hoveredSection === "company"
-                    ? "translate(-50%, -50%)"
+                    ? "translate(-50%, -50%) scale(0.9)"
                     : `translate(-50%, -50%) rotate(${index * 2}deg)`,
                   zIndex: hoveredCard === index ? 50 : companyProjects.length - index,
                 }}

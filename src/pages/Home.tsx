@@ -91,25 +91,79 @@ const Home = () => {
             </h2>
           </ScrollReveal>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="relative h-[400px] sm:h-[500px] flex items-center justify-center">
+          <div className="max-w-6xl mx-auto">
+            <div 
+              className="relative h-[400px] sm:h-[500px] flex items-center justify-center"
+              onMouseEnter={() => setHoveredCard("section")}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              {/* Mobile: vertical stacking */}
               {featuredProjects.map((project, index) => (
-                <ScrollReveal
-                  key={project.id}
-                  delay={index * 200}
+                <div
+                  key={`mobile-${project.id}`}
                   className={cn(
-                    "absolute transition-all duration-500 ease-out",
-                    hoveredCard === null
+                    "sm:hidden absolute transition-all duration-700 ease-out",
+                    hoveredCard === "section" || hoveredCard === project.id
                       ? index === 0
-                        ? "left-1/4 rotate-[-5deg] z-10"
-                        : "right-1/4 rotate-[5deg] z-20"
-                      : hoveredCard === project.id
-                      ? "left-1/2 -translate-x-1/2 rotate-0 z-30 scale-110"
+                        ? "top-[20%] left-1/2 -translate-x-1/2"
+                        : "top-[60%] left-1/2 -translate-x-1/2"
                       : index === 0
-                      ? "left-[10%] rotate-[-10deg] z-10 scale-95 opacity-70"
-                      : "right-[10%] rotate-[10deg] z-10 scale-95 opacity-70"
+                      ? "top-[35%] left-1/2 -translate-x-1/2 rotate-[-3deg]"
+                      : "top-[40%] left-1/2 -translate-x-1/2 rotate-[3deg]",
+                    hoveredCard === project.id && "z-30 scale-105"
                   )}
                 >
+                  {project.isInternal ? (
+                    <Link to={project.link}>
+                      <Card
+                        className="w-[280px] h-[280px] glass-effect border-white/10 p-8 card-glow cursor-pointer"
+                        onMouseEnter={() => setHoveredCard(project.id)}
+                        onMouseLeave={() => setHoveredCard("section")}
+                      >
+                        <div className="h-full flex flex-col justify-center items-center text-center">
+                          <h3 className="text-2xl font-bold mb-4 text-primary">
+                            {project.title}
+                          </h3>
+                          <p className="text-muted-foreground mb-6">{project.description}</p>
+                          <ArrowRight className="w-8 h-8 text-primary" />
+                        </div>
+                      </Card>
+                    </Link>
+                  ) : (
+                    <a href={project.link} target="_blank" rel="noopener noreferrer">
+                      <Card
+                        className="w-[280px] h-[280px] glass-effect border-white/10 p-8 card-glow cursor-pointer"
+                        onMouseEnter={() => setHoveredCard(project.id)}
+                        onMouseLeave={() => setHoveredCard("section")}
+                      >
+                        <div className="h-full flex flex-col justify-center items-center text-center">
+                          <h3 className="text-2xl font-bold mb-4 text-primary">
+                            {project.title}
+                          </h3>
+                          <p className="text-muted-foreground mb-6">{project.description}</p>
+                          <ExternalLink className="w-8 h-8 text-primary" />
+                        </div>
+                      </Card>
+                    </a>
+                  )}
+                </div>
+              ))}
+
+              {/* Desktop: horizontal spread */}
+              {featuredProjects.map((project, index) => {
+                const isHovered = hoveredCard === "section" || hoveredCard === project.id;
+                return (
+                  <div
+                    key={`desktop-${project.id}`}
+                    className={cn(
+                      "hidden sm:block absolute transition-all duration-700 ease-out",
+                      hoveredCard === project.id && "z-30 scale-110",
+                      !isHovered && index === 0 && "left-1/4 top-1/2 -translate-y-1/2 rotate-[-5deg] z-10",
+                      !isHovered && index === 1 && "right-1/4 top-1/2 -translate-y-1/2 rotate-[5deg] z-20",
+                      isHovered && "top-1/2 -translate-y-1/2 rotate-0"
+                    )}
+                    style={isHovered ? { left: `${25 + index * 40}%` } : undefined}
+                  >
                   {project.isInternal ? (
                     <Link to={project.link}>
                       <Card
@@ -143,15 +197,16 @@ const Home = () => {
                       </Card>
                     </a>
                   )}
-                </ScrollReveal>
-              ))}
+                </div>
+              );
+              })}
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20">
         <div className="container mx-auto max-w-4xl">
           <ScrollReveal>
             <Card className="glass-effect border-white/10 p-8 sm:p-12 text-center card-glow">
