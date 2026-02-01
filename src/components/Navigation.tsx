@@ -84,13 +84,6 @@ const Navigation = () => {
               </NavLink>
             ))}
             <button
-              onClick={() => scrollToSection("about")}
-              className="relative py-2 text-foreground hover:text-primary transition-colors group"
-            >
-              About
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-            </button>
-            <button
               onClick={() => scrollToSection("contact")}
               className="relative py-2 text-foreground hover:text-primary transition-colors group"
             >
@@ -145,12 +138,6 @@ const Navigation = () => {
                     {link.label}
                   </NavLink>
                 ))}
-                <button
-                  onClick={() => scrollToSection("about")}
-                  className="text-lg text-left transition-colors hover:text-primary"
-                >
-                  About
-                </button>
                 <button
                   onClick={() => scrollToSection("contact")}
                   className="text-lg text-left transition-colors hover:text-primary"

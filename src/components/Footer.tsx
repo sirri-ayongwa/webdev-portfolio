@@ -41,7 +41,7 @@ const Footer = () => {
 
           {/* Copyright */}
           <p className="text-muted-foreground text-sm text-center">
-            Sirri's portfolio. All rights reserved © 2025
+            Sirri's portfolio. All rights reserved © 2026
           </p>
         </div>
       </div>
