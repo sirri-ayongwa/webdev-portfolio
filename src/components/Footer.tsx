@@ -1,11 +1,16 @@
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Twitter, Mail, Paperclip } from "lucide-react";
 import { SiMedium, SiBehance } from "react-icons/si";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const Footer = () => {
   const socialLinks = [
     { icon: Github, href: "https://github.com/sirri-ayongwa", label: "GitHub" },
     { icon: Linkedin, href: "https://www.linkedin.com/in/sirri-ayongwa/", label: "LinkedIn" },
     { icon: Twitter, href: "https://www.twitter.com/SirriCodes", label: "Twitter" },
+    { icon: SiBehance, href: "https://behance.net/sirri", label: "Behance" },
+    { icon: SiMedium, href: "https://medium.com/@sirri-ayongwa", label: "Medium" },
+    { icon: Mail, href: "mailto:ayongwasirri@gmail.com", label: "Email" },
+    { icon: Paperclip, href: "https://drive.google.com/file/d/1ySeGFibTrR-SOfflmDP1um0hWBMxzsPv/view?usp=sharing", label: "View my resume" },
   ];
 
   return (
@@ -13,37 +18,25 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center space-y-6">
           {/* Social Icons */}
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center flex-wrap justify-center gap-2">
             {socialLinks.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-all"
-                aria-label={social.label}
-              >
-                <social.icon className="w-5 h-5" />
-              </a>
+              <Tooltip key={social.label}>
+                <TooltipTrigger asChild>
+                  <a
+                    href={social.href}
+                    target={social.href.startsWith("mailto:") ? undefined : "_blank"}
+                    rel={social.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                    className="p-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-all"
+                    aria-label={social.label}
+                  >
+                    <social.icon className="w-5 h-5" />
+                  </a>
+                </TooltipTrigger>
+                <TooltipContent side="top">
+                  <p>{social.label}</p>
+                </TooltipContent>
+              </Tooltip>
             ))}
-            <a
-              href="https://behance.net/sirri"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-all"
-              aria-label="Behance"
-            >
-              <SiBehance className="w-5 h-5" />
-            </a>
-            <a
-              href="https://medium.com/@sirri-ayongwa"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-primary/10 hover:text-primary transition-all"
-              aria-label="Medium"
-            >
-              <SiMedium className="w-5 h-5" />
-            </a>
           </div>
 
           {/* Copyright */}
