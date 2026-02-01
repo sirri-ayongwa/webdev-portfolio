@@ -2,6 +2,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ProjectCard from "@/components/ProjectCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ExternalLink } from "lucide-react";
+import MessageDialog from "@/components/MessageDialog";
 import {
   SiHtml5,
   SiCss3,
@@ -17,6 +18,7 @@ import tipCalcPreview from "@/assets/tip-calculator.png";
 import recipeFinderPreview from "@/assets/recipe-finder.png";
 import wdcPreview from "@/assets/world-disaster-center.png";
 import siciliamiaPreview from "@/assets/siciliamia.png";
+import tagcardPreview from "@/assets/tagcard-preview.png";
 
 const Projects = () => {
   const personalProjects = [
@@ -56,7 +58,7 @@ const Projects = () => {
       ],
       liveLink: "https://tagcard.vercel.app/",
       githubLink: "https://github.com/sirri-ayongwa/tagcard",
-      image: meowmartPreview, // Placeholder - will update when image is provided
+      image: tagcardPreview,
     },
     {
       title: "Tip Calculator",
@@ -215,7 +217,7 @@ const Projects = () => {
         </section>
 
         {/* CTA */}
-        <section>
+        <section id="contact" className="scroll-mt-20">
           <ScrollReveal>
             <div className="text-center py-12 px-8 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/10">
               <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-primary">
@@ -224,12 +226,14 @@ const Projects = () => {
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
                 Let's collaborate and create something extraordinary together!
               </p>
-              <a href="mailto:ayongwasirri@gmail.com">
-                <Button className="bg-primary hover:bg-primary/90 text-white group">
-                  Work With Me
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </a>
+              <MessageDialog
+                trigger={
+                  <Button className="bg-primary hover:bg-primary/90 text-white group">
+                    Work With Me
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                }
+              />
             </div>
           </ScrollReveal>
         </section>

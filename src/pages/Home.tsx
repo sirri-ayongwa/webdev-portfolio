@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import AboutSection from "@/components/AboutSection";
@@ -48,23 +47,6 @@ const Home = () => {
               experiences. Passionate about creating engaging and responsive websites that deliver
               exceptional results.
             </p>
-          </ScrollReveal>
-          <ScrollReveal delay={400}>
-            <button
-              onClick={() => {
-                const about = document.getElementById("about");
-                if (about) about.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="inline-flex items-center justify-center"
-            >
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-white group"
-              >
-                Learn More About Me
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </button>
           </ScrollReveal>
         </div>
       </section>
@@ -231,29 +213,6 @@ const Home = () => {
               })}
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20">
-        <div className="container mx-auto max-w-4xl">
-          <ScrollReveal>
-            <div className="text-center py-12 px-8 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/10">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-primary">
-                Let's Connect!
-              </h2>
-              <p className="text-muted-foreground text-base sm:text-lg mb-8 leading-relaxed">
-                Feel free to reach out. Have a project in mind? Want to hire me? Connect with me,
-                let's build something amazing together! Best way to keep things profeshhh😊
-              </p>
-              <a href="mailto:ayongwasirri@gmail.com">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white group">
-                  Work With Me
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </a>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 
