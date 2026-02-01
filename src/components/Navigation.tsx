@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, Code2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,22 +19,34 @@ const Navigation = () => {
 
   const navLinks = [
     { to: "/", label: "Home" },
-    { to: "/about", label: "About" },
     { to: "/projects", label: "Projects" },
   ];
 
-  const scrollToContact = () => {
-    // Navigate to home page first, then scroll to contact
-    if (window.location.pathname !== "/") {
-      window.location.href = "/#contact";
+  const scrollToSection = (sectionId: string) => {
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollTo: sectionId } });
     } else {
-      const contact = document.getElementById("contact");
-      if (contact) {
-        contact.scrollIntoView({ behavior: "smooth" });
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
       }
     }
     setIsOpen(false);
   };
+
+  // Handle scroll after navigation
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      setTimeout(() => {
+        const section = document.getElementById(location.state.scrollTo);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+      // Clear the state
+      window.history.replaceState({}, document.title);
+    }
+  }, [location]);
 
   return (
     <nav
@@ -69,6 +83,20 @@ const Navigation = () => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </NavLink>
             ))}
+            <button
+              onClick={() => scrollToSection("about")}
+              className="relative py-2 text-foreground hover:text-primary transition-colors group"
+            >
+              About
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+            </button>
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="relative py-2 text-foreground hover:text-primary transition-colors group"
+            >
+              Contact
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -85,7 +113,7 @@ const Navigation = () => {
       {/* Mobile Menu Overlay */}
       {isOpen && (
         <>
-          <div 
+          <div
             className="fixed inset-0 bg-black/50 z-40 md:hidden"
             onClick={() => setIsOpen(false)}
           />
@@ -118,7 +146,13 @@ const Navigation = () => {
                   </NavLink>
                 ))}
                 <button
-                  onClick={scrollToContact}
+                  onClick={() => scrollToSection("about")}
+                  className="text-lg text-left transition-colors hover:text-primary"
+                >
+                  About
+                </button>
+                <button
+                  onClick={() => scrollToSection("contact")}
                   className="text-lg text-left transition-colors hover:text-primary"
                 >
                   Contact

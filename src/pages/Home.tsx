@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import AboutSection from "@/components/AboutSection";
+import TechMarquee from "@/components/TechMarquee";
+import BookCallSection from "@/components/BookCallSection";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import meowmartPreview from "@/assets/meowmart.png";
@@ -48,7 +50,13 @@ const Home = () => {
             </p>
           </ScrollReveal>
           <ScrollReveal delay={400}>
-            <Link to="/about">
+            <button
+              onClick={() => {
+                const about = document.getElementById("about");
+                if (about) about.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="inline-flex items-center justify-center"
+            >
               <Button
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-white group"
@@ -56,35 +64,16 @@ const Home = () => {
                 Learn More About Me
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-            </Link>
+            </button>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* About Summary Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="container mx-auto max-w-4xl">
-          <ScrollReveal>
-            <Card className="glass-effect border-white/10 p-8 sm:p-12 card-glow">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-primary">
-                Crafting Digital Experiences
-              </h2>
-              <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
-                With over 3 years of experience in front-end development, I specialize in building
-                modern, responsive web applications using React, TypeScript, and Tailwind CSS. My
-                focus is on creating intuitive user interfaces that combine aesthetics with
-                functionality.
-              </p>
-              <Link to="/about">
-                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
-                  Discover My Journey
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-            </Card>
-          </ScrollReveal>
-        </div>
-      </section>
+      {/* About Section */}
+      <AboutSection />
+
+      {/* Tech Stack Marquee */}
+      <TechMarquee />
 
       {/* Featured Projects Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
@@ -96,7 +85,7 @@ const Home = () => {
           </ScrollReveal>
 
           <div className="max-w-6xl mx-auto">
-            <div 
+            <div
               className="relative h-[400px] sm:h-[500px] flex items-center justify-center"
               onMouseEnter={() => setHoveredCard("section")}
               onMouseLeave={() => setHoveredCard(null)}
@@ -119,14 +108,14 @@ const Home = () => {
                 >
                   {project.isInternal ? (
                     <Link to={project.link}>
-                      <Card
-                        className="w-[280px] glass-effect border-white/10 overflow-hidden card-glow cursor-pointer"
+                      <div
+                        className="w-[280px] glass-effect border-white/10 overflow-hidden card-glow cursor-pointer rounded-xl"
                         onMouseEnter={() => setHoveredCard(project.id)}
                         onMouseLeave={() => setHoveredCard("section")}
                       >
                         <div className="aspect-video w-full overflow-hidden">
-                          <img 
-                            src={project.image} 
+                          <img
+                            src={project.image}
                             alt={project.title}
                             className="w-full h-full object-cover"
                           />
@@ -140,18 +129,18 @@ const Home = () => {
                           </div>
                           <p className="text-muted-foreground text-sm">{project.description}</p>
                         </div>
-                      </Card>
+                      </div>
                     </Link>
                   ) : (
                     <a href={project.link} target="_blank" rel="noopener noreferrer">
-                      <Card
-                        className="w-[280px] glass-effect border-white/10 overflow-hidden card-glow cursor-pointer"
+                      <div
+                        className="w-[280px] glass-effect border-white/10 overflow-hidden card-glow cursor-pointer rounded-xl"
                         onMouseEnter={() => setHoveredCard(project.id)}
                         onMouseLeave={() => setHoveredCard("section")}
                       >
                         <div className="aspect-video w-full overflow-hidden">
-                          <img 
-                            src={project.image} 
+                          <img
+                            src={project.image}
                             alt={project.title}
                             className="w-full h-full object-cover"
                           />
@@ -165,7 +154,7 @@ const Home = () => {
                           </div>
                           <p className="text-muted-foreground text-sm">{project.description}</p>
                         </div>
-                      </Card>
+                      </div>
                     </a>
                   )}
                 </div>
@@ -186,59 +175,59 @@ const Home = () => {
                     )}
                     style={isHovered ? { left: `${25 + index * 40}%` } : undefined}
                   >
-                  {project.isInternal ? (
-                    <Link to={project.link}>
-                      <Card
-                        className="w-[280px] sm:w-[340px] glass-effect border-white/10 overflow-hidden card-glow cursor-pointer"
-                        onMouseEnter={() => setHoveredCard(project.id)}
-                        onMouseLeave={() => setHoveredCard(null)}
-                      >
-                        <div className="aspect-video w-full overflow-hidden">
-                          <img 
-                            src={project.image} 
-                            alt={project.title}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div className="p-6 sm:p-8">
-                          <div className="flex items-start justify-between mb-4">
-                            <h3 className="text-xl sm:text-2xl font-bold text-primary">
-                              {project.title}
-                            </h3>
-                            <ArrowRight className="w-5 h-5 text-primary flex-shrink-0" />
+                    {project.isInternal ? (
+                      <Link to={project.link}>
+                        <div
+                          className="w-[280px] sm:w-[340px] glass-effect border-white/10 overflow-hidden card-glow cursor-pointer rounded-xl"
+                          onMouseEnter={() => setHoveredCard(project.id)}
+                          onMouseLeave={() => setHoveredCard(null)}
+                        >
+                          <div className="aspect-video w-full overflow-hidden">
+                            <img
+                              src={project.image}
+                              alt={project.title}
+                              className="w-full h-full object-cover"
+                            />
                           </div>
-                          <p className="text-muted-foreground text-sm sm:text-base">{project.description}</p>
-                        </div>
-                      </Card>
-                    </Link>
-                  ) : (
-                    <a href={project.link} target="_blank" rel="noopener noreferrer">
-                      <Card
-                        className="w-[280px] sm:w-[340px] glass-effect border-white/10 overflow-hidden card-glow cursor-pointer"
-                        onMouseEnter={() => setHoveredCard(project.id)}
-                        onMouseLeave={() => setHoveredCard(null)}
-                      >
-                        <div className="aspect-video w-full overflow-hidden">
-                          <img 
-                            src={project.image} 
-                            alt={project.title}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div className="p-6 sm:p-8">
-                          <div className="flex items-start justify-between mb-4">
-                            <h3 className="text-xl sm:text-2xl font-bold text-primary">
-                              {project.title}
-                            </h3>
-                            <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                          <div className="p-6 sm:p-8">
+                            <div className="flex items-start justify-between mb-4">
+                              <h3 className="text-xl sm:text-2xl font-bold text-primary">
+                                {project.title}
+                              </h3>
+                              <ArrowRight className="w-5 h-5 text-primary flex-shrink-0" />
+                            </div>
+                            <p className="text-muted-foreground text-sm sm:text-base">{project.description}</p>
                           </div>
-                          <p className="text-muted-foreground text-sm sm:text-base">{project.description}</p>
                         </div>
-                      </Card>
-                    </a>
-                  )}
-                </div>
-              );
+                      </Link>
+                    ) : (
+                      <a href={project.link} target="_blank" rel="noopener noreferrer">
+                        <div
+                          className="w-[280px] sm:w-[340px] glass-effect border-white/10 overflow-hidden card-glow cursor-pointer rounded-xl"
+                          onMouseEnter={() => setHoveredCard(project.id)}
+                          onMouseLeave={() => setHoveredCard(null)}
+                        >
+                          <div className="aspect-video w-full overflow-hidden">
+                            <img
+                              src={project.image}
+                              alt={project.title}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div className="p-6 sm:p-8">
+                            <div className="flex items-start justify-between mb-4">
+                              <h3 className="text-xl sm:text-2xl font-bold text-primary">
+                                {project.title}
+                              </h3>
+                              <ExternalLink className="w-5 h-5 text-primary flex-shrink-0" />
+                            </div>
+                            <p className="text-muted-foreground text-sm sm:text-base">{project.description}</p>
+                          </div>
+                        </div>
+                      </a>
+                    )}
+                  </div>
+                );
               })}
             </div>
           </div>
@@ -249,7 +238,7 @@ const Home = () => {
       <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20">
         <div className="container mx-auto max-w-4xl">
           <ScrollReveal>
-            <Card className="glass-effect border-white/10 p-8 sm:p-12 text-center card-glow">
+            <div className="text-center py-12 px-8 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/10">
               <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-primary">
                 Let's Connect!
               </h2>
@@ -263,10 +252,13 @@ const Home = () => {
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </a>
-            </Card>
+            </div>
           </ScrollReveal>
         </div>
       </section>
+
+      {/* Book A Call Section */}
+      <BookCallSection />
     </div>
   );
 };
