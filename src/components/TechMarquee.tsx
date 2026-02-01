@@ -35,7 +35,7 @@ const TechMarquee = () => {
     <section className="py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="container mx-auto max-w-6xl mb-12 text-center">
         <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-3">
-          Stack I Use
+          Stacks I Use
         </h2>
         <p className="text-muted-foreground text-base sm:text-lg">
           Technologies I work with to build products that solve real-world problems
