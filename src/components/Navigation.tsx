@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import { Menu, X, Code2 } from "lucide-react";
+import { Menu, X, Code2, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
+import useBackgroundMusic from "@/hooks/useBackgroundMusic";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { isPlaying, toggle: toggleMusic } = useBackgroundMusic();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,16 +92,32 @@ const Navigation = () => {
               Contact
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
             </button>
+            <button
+              onClick={toggleMusic}
+              className="p-2 text-foreground hover:text-primary transition-colors"
+              aria-label={isPlaying ? "Mute background music" : "Play background music"}
+            >
+              {isPlaying ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
+          <div className="md:hidden flex items-center space-x-2">
+            <button
+              onClick={toggleMusic}
+              className="p-2 text-foreground hover:text-primary transition-colors"
+              aria-label={isPlaying ? "Mute background music" : "Play background music"}
+            >
+              {isPlaying ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
+            </button>
+            <button
+              className="p-2 text-foreground hover:text-primary transition-colors"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+          </div>
         </div>
       </div>
 
