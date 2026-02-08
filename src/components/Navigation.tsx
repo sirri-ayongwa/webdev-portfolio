@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import { Menu, X, Code2, Volume2, VolumeX } from "lucide-react";
+import { Menu, X, Volume2, VolumeX } from "lucide-react";
 import { cn } from "@/lib/utils";
 import useBackgroundMusic from "@/hooks/useBackgroundMusic";
 
@@ -36,7 +36,6 @@ const Navigation = () => {
     setIsOpen(false);
   };
 
-  // Handle scroll after navigation
   useEffect(() => {
     if (location.state?.scrollTo) {
       setTimeout(() => {
@@ -45,80 +44,65 @@ const Navigation = () => {
           section.scrollIntoView({ behavior: "smooth" });
         }
       }, 100);
-      // Clear the state
       window.history.replaceState({}, document.title);
     }
   }, [location]);
 
   return (
-    <nav
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled ? "glass-effect shadow-lg" : "bg-transparent"
-      )}
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo */}
+    <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
+      <div
+        className={cn(
+          "flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 rounded-full border transition-all duration-300",
+          scrolled
+            ? "bg-background/80 backdrop-blur-xl border-white/10 shadow-lg shadow-black/20"
+            : "bg-background/50 backdrop-blur-md border-white/5"
+        )}
+      >
+        {/* Nav Links */}
+        {navLinks.map((link) => (
           <NavLink
-            to="/"
-            className="flex items-center space-x-2 text-xl sm:text-2xl font-bold hover:text-primary transition-colors"
+            key={link.to}
+            to={link.to}
+            end
+            className={({ isActive }) =>
+              cn(
+                "px-3 sm:px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200",
+                isActive
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+              )
+            }
           >
-            <Code2 className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
+            {link.label}
           </NavLink>
+        ))}
+        <button
+          onClick={() => scrollToSection("contact")}
+          className="px-3 sm:px-4 py-1.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-200"
+        >
+          Contact
+        </button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                end
-                className={({ isActive }) =>
-                  cn(
-                    "relative py-2 text-foreground hover:text-primary transition-colors group",
-                    isActive && "text-primary"
-                  )
-                }
-              >
-                {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-              </NavLink>
-            ))}
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="relative py-2 text-foreground hover:text-primary transition-colors group"
-            >
-              Contact
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-            </button>
-            <button
-              onClick={toggleMusic}
-              className="p-2 text-foreground hover:text-primary transition-colors"
-              aria-label={isPlaying ? "Mute background music" : "Play background music"}
-            >
-              {isPlaying ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
-            </button>
-          </div>
+        {/* Separator */}
+        <div className="w-px h-5 bg-white/10 mx-1" />
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-2">
-            <button
-              onClick={toggleMusic}
-              className="p-2 text-foreground hover:text-primary transition-colors"
-              aria-label={isPlaying ? "Mute background music" : "Play background music"}
-            >
-              {isPlaying ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
-            </button>
-            <button
-              className="p-2 text-foreground hover:text-primary transition-colors"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
-            >
-              <Menu className="w-6 h-6" />
-            </button>
-          </div>
-        </div>
+        {/* Volume toggle */}
+        <button
+          onClick={toggleMusic}
+          className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-200"
+          aria-label={isPlaying ? "Mute background music" : "Play background music"}
+        >
+          {isPlaying ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+        </button>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-200"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+        >
+          <Menu className="w-4 h-4" />
+        </button>
       </div>
 
       {/* Mobile Menu Overlay */}

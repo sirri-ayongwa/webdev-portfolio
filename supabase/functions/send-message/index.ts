@@ -8,12 +8,12 @@ const corsHeaders = {
 };
 
 interface MessageRequest {
-  subject: string;
+  name?: string;
+  email: string;
   message: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
-  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -25,33 +25,45 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const resend = new Resend(RESEND_API_KEY);
-    const { subject, message }: MessageRequest = await req.json();
+    const { name, email, message }: MessageRequest = await req.json();
 
     // Validate required fields
-    if (!subject || !message) {
-      throw new Error("Missing required fields: subject and message");
+    if (!email || !message) {
+      throw new Error("Missing required fields: email and message");
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      throw new Error("Invalid email address");
     }
 
     // Validate lengths
-    if (subject.length > 100) {
-      throw new Error("Subject must be less than 100 characters");
+    if (name && name.length > 100) {
+      throw new Error("Name must be less than 100 characters");
+    }
+    if (email.length > 255) {
+      throw new Error("Email must be less than 255 characters");
     }
     if (message.length > 1000) {
       throw new Error("Message must be less than 1000 characters");
     }
 
+    const senderName = name || "Anonymous";
+    const subject = `Portfolio Message from ${senderName}`;
+
     const emailResponse = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
       to: ["ayongwasirri@gmail.com"],
-      subject: `Portfolio Message: ${subject}`,
+      subject,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
           <h1 style="color: #3b82f6; border-bottom: 2px solid #3b82f6; padding-bottom: 10px;">
             New Message from Portfolio
           </h1>
           <div style="margin: 20px 0;">
-            <p style="color: #666; font-size: 14px; margin-bottom: 5px;">Subject:</p>
-            <p style="color: #333; font-size: 16px; font-weight: 600; margin: 0;">${subject}</p>
+            <p style="color: #666; font-size: 14px; margin-bottom: 5px;">From:</p>
+            <p style="color: #333; font-size: 16px; font-weight: 600; margin: 0;">${senderName} (${email})</p>
           </div>
           <div style="margin: 20px 0;">
             <p style="color: #666; font-size: 14px; margin-bottom: 5px;">Message:</p>

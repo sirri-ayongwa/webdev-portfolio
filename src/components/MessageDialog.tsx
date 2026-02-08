@@ -14,15 +14,23 @@ interface MessageDialogProps {
 
 const MessageDialog = ({ trigger }: MessageDialogProps) => {
   const [open, setOpen] = useState(false);
-  const [subject, setSubject] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!subject.trim() || !message.trim()) {
-      toast.error("Please fill in all fields");
+    if (!email.trim() || !message.trim()) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      toast.error("Please enter a valid email address");
       return;
     }
 
@@ -30,13 +38,18 @@ const MessageDialog = ({ trigger }: MessageDialogProps) => {
 
     try {
       const { data, error } = await supabase.functions.invoke("send-message", {
-        body: { subject: subject.trim(), message: message.trim() },
+        body: {
+          name: name.trim() || undefined,
+          email: email.trim(),
+          message: message.trim(),
+        },
       });
 
       if (error) throw error;
 
       toast.success("Message sent successfully! I'll get back to you soon.");
-      setSubject("");
+      setName("");
+      setEmail("");
       setMessage("");
       setOpen(false);
     } catch (error: any) {
@@ -65,21 +78,39 @@ const MessageDialog = ({ trigger }: MessageDialogProps) => {
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-primary">Send a Message</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-6 mt-4">
+        <form onSubmit={handleSubmit} className="space-y-5 mt-4">
           <div className="space-y-2">
-            <Label htmlFor="subject" className="text-foreground">Subject</Label>
+            <Label htmlFor="name" className="text-foreground">
+              Name <span className="text-muted-foreground text-xs">(optional)</span>
+            </Label>
             <Input
-              id="subject"
-              placeholder="What's this about?"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
+              id="name"
+              placeholder="Your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="bg-background/50 border-white/10 focus:border-primary"
               maxLength={100}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-foreground">
+              Email <span className="text-red-500 text-sm">*</span>
+            </Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="your@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="bg-background/50 border-white/10 focus:border-primary"
+              maxLength={255}
               required
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="message" className="text-foreground">Message</Label>
+            <Label htmlFor="message" className="text-foreground">
+              Message <span className="text-red-500 text-sm">*</span>
+            </Label>
             <Textarea
               id="message"
               placeholder="Tell me more..."
