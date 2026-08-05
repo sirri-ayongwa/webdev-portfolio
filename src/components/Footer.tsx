@@ -10,7 +10,7 @@ const Footer = () => {
     { icon: SiBehance, href: "https://behance.net/sirri", label: "Behance" },
     { icon: SiMedium, href: "https://medium.com/@sirri-ayongwa", label: "Medium" },
     { icon: Mail, href: "mailto:ayongwasirri@gmail.com", label: "Email" },
-    { icon: Paperclip, href: "https://drive.google.com/file/d/1ySeGFibTrR-SOfflmDP1um0hWBMxzsPv/view?usp=sharing", label: "View my resume" },
+    { icon: Paperclip, href: "https://drive.google.com/file/d/1kMQatq_yLciu2N68B7X7MrxvSo_mury7/view?usp=drive_link", label: "View my resume" },
   ];
 
   return (
