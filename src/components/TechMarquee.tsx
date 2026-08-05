@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   SiHtml5,
-  SiCss,
+  SiCss3,
   SiJavascript,
   SiReact,
   SiTypescript,
@@ -17,7 +17,7 @@ const TechMarquee = () => {
 
   const techStack = [
     { icon: SiHtml5, name: "HTML5", color: "#E34F26" },
-    { icon: SiCss, name: "CSS3", color: "#1572B6" },
+    { icon: SiCss3, name: "CSS3", color: "#1572B6" },
     { icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
     { icon: SiReact, name: "React", color: "#61DAFB" },
     { icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
